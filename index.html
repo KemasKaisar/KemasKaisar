@@ -107,8 +107,8 @@
 
   .slider { position: relative; margin: 0 0 1.75rem; }
   .shots { display: grid; overflow: hidden; touch-action: pan-y; border: 1px solid var(--line); background: var(--bg2); }
-  .shots figure { grid-area: 1 / 1; margin: 0; min-width: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility 0s .9s; }
-  .shots figure.on { opacity: 1; visibility: visible; transition: opacity .9s ease; }
+  .shots figure { grid-area: 1 / 1; margin: 0; background: var(--bg2); min-width: 0; opacity: 0; z-index: 0; transition: opacity 0s .6s; }
+  .shots figure.on { opacity: 1; z-index: 2; transition: opacity .6s ease; }
   .shots img { display: block; width: 100%; height: auto; }
   .shots figcaption { color: var(--muted); font-size: .9rem; padding: .6rem .9rem; border-top: 1px solid var(--line); }
   .snav { position: absolute; top: calc(50% - 1.5rem); width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0;
@@ -281,7 +281,7 @@
       }
     }
     function stop() { clearInterval(timer); }
-    function start() { stop(); if (!off && !paused && !document.hidden) timer = setInterval(function () { show(i + 1); }, 2000); }
+    function start() { stop(); if (!off && !paused && !document.hidden) timer = setInterval(function () { show(i + 1); }, 1200); }
     var slider = t.parentNode;
     slider.addEventListener('mouseenter', function () { paused = true; stop(); });
     slider.addEventListener('mouseleave', function () { paused = false; start(); });
