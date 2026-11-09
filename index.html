@@ -96,19 +96,25 @@
   .tags { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; }
   .tags li { border: 1px solid var(--blue); border-radius: 999px; padding: .25rem 1rem; font-weight: 500; }
 
-  .project { background: var(--bg); border-left: 5px solid var(--blue); padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 60rem; }
+  .project { background: var(--bg); border-left: 5px solid var(--blue); padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 52rem; }
   .project h3 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); line-height: 1.25; margin: 0 0 .4rem; }
   .project .meta { color: var(--muted); margin: 0 0 1rem; }
   .project p { color: var(--muted); margin: 0 0 1rem; max-width: 40rem; }
 
-  .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0 0 1.75rem; }
-  .shots figure { margin: 0; border: 1px solid var(--line); background: var(--bg2); }
-  .shots figure:first-child { grid-column: 1 / -1; }
-  .shots a { display: block; overflow: hidden; }
-  .shots img { display: block; width: 100%; height: auto; transition: transform .3s; }
-  .shots a:hover img { transform: scale(1.03); }
+  .slider { position: relative; margin: 0 0 1.75rem; }
+  .shots { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    border: 1px solid var(--line); background: var(--bg2); scrollbar-width: none; }
+  .shots::-webkit-scrollbar { display: none; }
+  .shots figure { margin: 0; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+  .shots img { display: block; width: 100%; height: auto; }
   .shots figcaption { color: var(--muted); font-size: .9rem; padding: .6rem .9rem; border-top: 1px solid var(--line); }
-  @media (max-width: 600px) { .shots { grid-template-columns: 1fr; } }
+  .snav { position: absolute; top: calc(50% - 1.5rem); width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0;
+    background: rgba(26,28,37,.8); color: #fff; display: grid; place-items: center; cursor: pointer; }
+  .snav:hover { background: var(--blue); }
+  .snav.prev { left: .75rem; } .snav.next { right: .75rem; }
+  .dots { display: flex; justify-content: center; gap: .5rem; margin-top: .9rem; }
+  .dots button { width: .7rem; height: .7rem; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer; }
+  .dots button[aria-current="true"] { background: var(--blue); }
 
   .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
   .contact li { display: flex; gap: 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: .9rem; }
@@ -215,12 +221,17 @@
         <h3>Game RPG edukasi Perang Diponegoro</h3>
         <p class="meta">Tugas akhir</p>
         <p>Game RPG berbasis giliran yang mengajak siswa menjelajahi peristiwa Perang Diponegoro (1825–1827) lewat cerita, pertempuran, dan pilihan strategi. Sasarannya siswa usia 15–18 tahun, dan pengembangannya mengikuti tahapan ADDIE.</p>
-        <div class="shots">
-          <figure><a href="diponegoro-menu.png" target="_blank" rel="noopener"><img src="diponegoro-menu.png" alt="Menu utama game Perang Diponegoro" width="1503" height="832" loading="lazy"></a><figcaption>Menu utama</figcaption></figure>
-          <figure><a href="diponegoro-desa.png" target="_blank" rel="noopener"><img src="diponegoro-desa.png" alt="Pangeran Diponegoro berjalan di desa Tegalrejo tahun 1825" width="1501" height="832" loading="lazy"></a><figcaption>Penjelajahan: Tegalrejo 1825</figcaption></figure>
-          <figure><a href="diponegoro-plered.png" target="_blank" rel="noopener"><img src="diponegoro-plered.png" alt="Pangeran Diponegoro dikepung pasukan Belanda di Plered" width="1507" height="838" loading="lazy"></a><figcaption>Dialog cerita: Plered 1826</figcaption></figure>
-          <figure><a href="diponegoro-pos.png" target="_blank" rel="noopener"><img src="diponegoro-pos.png" alt="Pangeran Diponegoro dan para sekutunya di Pos Belanda" width="1510" height="827" loading="lazy"></a><figcaption>Penjelajahan: Pos Belanda 1825</figcaption></figure>
-          <figure><a href="diponegoro-battle.png" target="_blank" rel="noopener"><img src="diponegoro-battle.png" alt="Pertempuran berbasis giliran melawan pasukan Belanda" width="1506" height="842" loading="lazy"></a><figcaption>Pertempuran berbasis giliran</figcaption></figure>
+        <div class="slider" aria-roledescription="carousel" aria-label="Tangkapan layar game">
+          <div class="shots" id="shots" tabindex="0">
+          <figure><img src="diponegoro-menu.png" alt="Menu utama game Perang Diponegoro" width="1503" height="832" loading="lazy"><figcaption>Menu utama</figcaption></figure>
+          <figure><img src="diponegoro-desa.png" alt="Pangeran Diponegoro berjalan di desa Tegalrejo tahun 1825" width="1501" height="832" loading="lazy"><figcaption>Penjelajahan: Tegalrejo 1825</figcaption></figure>
+          <figure><img src="diponegoro-plered.png" alt="Pangeran Diponegoro dikepung pasukan Belanda di Plered" width="1507" height="838" loading="lazy"><figcaption>Dialog cerita: Plered 1826</figcaption></figure>
+          <figure><img src="diponegoro-pos.png" alt="Pangeran Diponegoro dan para sekutunya di Pos Belanda" width="1510" height="827" loading="lazy"><figcaption>Penjelajahan: Pos Belanda 1825</figcaption></figure>
+          <figure><img src="diponegoro-battle.png" alt="Pertempuran berbasis giliran melawan pasukan Belanda" width="1506" height="842" loading="lazy"><figcaption>Pertempuran berbasis giliran</figcaption></figure>
+          </div>
+          <button class="snav prev" aria-label="Gambar sebelumnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 4l-6 6 6 6"/></svg></button>
+          <button class="snav next" aria-label="Gambar berikutnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></button>
+          <div class="dots" id="dots"></div>
         </div>
         <ul class="tags"><li>Unity 2022</li><li>C#</li><li>RPG berbasis giliran</li><li>ADDIE</li></ul>
       </article>
@@ -248,6 +259,23 @@
     var o = n.classList.toggle('open'); b.setAttribute('aria-expanded', o);
   });
   n.addEventListener('click', function (e) { if (e.target.tagName === 'A') { n.classList.remove('open'); b.setAttribute('aria-expanded', false); } });
+
+  (function () {
+    var t = document.getElementById('shots'), d = document.getElementById('dots'), f = t.children, i;
+    for (i = 0; i < f.length; i++) (function (k) {
+      var x = document.createElement('button'); x.setAttribute('aria-label', 'Gambar ' + (k + 1));
+      x.onclick = function () { t.scrollTo({ left: k * t.clientWidth }); }; d.appendChild(x);
+    })(i);
+    function cur() { return Math.round(t.scrollLeft / t.clientWidth); }
+    function sync() { for (var k = 0; k < d.children.length; k++) d.children[k].setAttribute('aria-current', k === cur()); }
+    t.addEventListener('scroll', sync); sync();
+    document.querySelector('.snav.prev').onclick = function () { t.scrollTo({ left: (cur() - 1) * t.clientWidth }); };
+    document.querySelector('.snav.next').onclick = function () { t.scrollTo({ left: (cur() + 1) * t.clientWidth }); };
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') t.scrollTo({ left: (cur() + 1) * t.clientWidth });
+      if (e.key === 'ArrowLeft') t.scrollTo({ left: (cur() - 1) * t.clientWidth });
+    });
+  })();
 </script>
 </body>
 </html>
