@@ -112,6 +112,8 @@
     background: rgba(26,28,37,.8); color: #fff; display: grid; place-items: center; cursor: pointer; }
   .snav:hover { background: var(--blue); }
   .snav.prev { left: .75rem; } .snav.next { right: .75rem; }
+  .pp { display: block; margin: .6rem auto 0; background: none; border: 1px solid var(--line); color: var(--muted); font: inherit; font-size: .85rem; padding: .15rem .9rem; border-radius: 999px; cursor: pointer; }
+  .pp:hover { color: var(--ink); border-color: var(--blue); }
   .dots { display: flex; justify-content: center; gap: .5rem; margin-top: .9rem; }
   .dots button { width: .7rem; height: .7rem; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer; }
   .dots button[aria-current="true"] { background: var(--blue); }
@@ -232,6 +234,7 @@
           <button class="snav prev" aria-label="Gambar sebelumnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 4l-6 6 6 6"/></svg></button>
           <button class="snav next" aria-label="Gambar berikutnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></button>
           <div class="dots" id="dots"></div>
+          <button class="pp" id="pp" aria-pressed="false">Jeda</button>
         </div>
         <ul class="tags"><li>Unity 2022</li><li>C#</li><li>RPG berbasis giliran</li><li>ADDIE</li></ul>
       </article>
@@ -271,15 +274,15 @@
     t.addEventListener('scroll', sync); sync();
     document.querySelector('.snav.prev').onclick = function () { t.scrollTo({ left: ((cur() - 1 + f.length) % f.length) * t.clientWidth }); };
     document.querySelector('.snav.next').onclick = next;
-    var timer, paused = false, slider = t.parentNode,
-        still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timer, paused = false, off = false, slider = t.parentNode;
     function next() { t.scrollTo({ left: ((cur() + 1) % f.length) * t.clientWidth }); }
-    function start() { stop(); if (!still && !paused && !document.hidden) timer = setInterval(next, 4000); }
+    function start() { stop(); if (!off && !paused && !document.hidden) timer = setInterval(next, 4000); }
     function stop() { clearInterval(timer); }
     slider.addEventListener('mouseenter', function () { paused = true; stop(); });
     slider.addEventListener('mouseleave', function () { paused = false; start(); });
-    slider.addEventListener('focusin', function () { paused = true; stop(); });
-    slider.addEventListener('focusout', function () { paused = false; start(); });
+    var pb = document.getElementById('pp');
+    pb.onclick = function () { off = !off; pb.textContent = off ? 'Putar' : 'Jeda'; pb.setAttribute('aria-pressed', off); start(); };
+    t.addEventListener('scrollend', start);
     t.addEventListener('touchstart', stop, { passive: true });
     t.addEventListener('touchend', start, { passive: true });
     document.addEventListener('visibilitychange', start);
