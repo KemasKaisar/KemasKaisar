@@ -269,8 +269,21 @@
     function cur() { return Math.round(t.scrollLeft / t.clientWidth); }
     function sync() { for (var k = 0; k < d.children.length; k++) d.children[k].setAttribute('aria-current', k === cur()); }
     t.addEventListener('scroll', sync); sync();
-    document.querySelector('.snav.prev').onclick = function () { t.scrollTo({ left: (cur() - 1) * t.clientWidth }); };
-    document.querySelector('.snav.next').onclick = function () { t.scrollTo({ left: (cur() + 1) * t.clientWidth }); };
+    document.querySelector('.snav.prev').onclick = function () { t.scrollTo({ left: ((cur() - 1 + f.length) % f.length) * t.clientWidth }); };
+    document.querySelector('.snav.next').onclick = next;
+    var timer, paused = false, slider = t.parentNode,
+        still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function next() { t.scrollTo({ left: ((cur() + 1) % f.length) * t.clientWidth }); }
+    function start() { stop(); if (!still && !paused && !document.hidden) timer = setInterval(next, 4000); }
+    function stop() { clearInterval(timer); }
+    slider.addEventListener('mouseenter', function () { paused = true; stop(); });
+    slider.addEventListener('mouseleave', function () { paused = false; start(); });
+    slider.addEventListener('focusin', function () { paused = true; stop(); });
+    slider.addEventListener('focusout', function () { paused = false; start(); });
+    t.addEventListener('touchstart', stop, { passive: true });
+    t.addEventListener('touchend', start, { passive: true });
+    document.addEventListener('visibilitychange', start);
+    start();
     t.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight') t.scrollTo({ left: (cur() + 1) * t.clientWidth });
       if (e.key === 'ArrowLeft') t.scrollTo({ left: (cur() - 1) * t.clientWidth });
