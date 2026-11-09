@@ -125,6 +125,31 @@
   .contact li { display: flex; gap: 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: .9rem; }
   .contact span { min-width: 7rem; color: var(--muted); }
   .contact a:hover { color: var(--blue); }
+  /* CV & Sertifikat */
+  .btn { display: inline-flex; align-items: center; gap: .6rem; background: var(--blue); color: #fff; text-decoration: none;
+    font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .95rem; padding: .85rem 1.6rem; border-radius: 999px; }
+  .btn:hover { background: #2b78ff; }
+  .cv { display: grid; gap: 3rem; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 860px) { .cv { grid-template-columns: 1fr 1fr; } }
+  .cv h3 { margin: 0 0 1.25rem; font-size: 1.05rem; color: var(--muted); font-weight: 500; }
+  .timeline { list-style: none; margin: 0 0 2rem; padding: 0 0 0 1.5rem; border-left: 2px solid var(--line); display: grid; gap: 1.75rem; }
+  .timeline li { position: relative; }
+  .timeline li::before { content: ""; position: absolute; left: calc(-1.5rem - 7px); top: .55rem; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); }
+  .timeline strong { display: block; font-size: 1.15rem; font-weight: 700; }
+  .timeline .when { color: var(--blue); font-weight: 500; font-size: .95rem; }
+  .timeline p { color: var(--muted); margin: .3rem 0 0; }
+  .certs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+  .cert { background: rgba(26,28,37,.82); border: 1px solid var(--line); border-top: 4px solid var(--blue); padding: 1.5rem; display: flex; flex-direction: column; height: 100%; }
+  .cert h3 { margin: 0 0 .4rem; font-size: 1.15rem; line-height: 1.3; }
+  .cert .by { color: var(--muted); margin: 0 0 1rem; font-size: .95rem; }
+  .cert .more { align-self: flex-start; margin-top: auto; }
+  .cert img { display: block; width: 100%; height: auto; margin: 0 0 1rem; border: 1px solid var(--line); }
+  .cert.featured { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 2rem; align-items: center; }
+  .cert.featured img { margin: 0; }
+  @media (max-width: 760px) { .cert.featured { grid-template-columns: 1fr; } }
+  .cert .badge { display: inline-block; align-self: flex-start; background: var(--blue); color: #fff; font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; padding: .15rem .7rem; border-radius: 999px; margin-bottom: .9rem; }
+  .cert .desc { color: var(--muted); margin: 0 0 1rem; font-size: .95rem; }
+  .cert .links { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: auto; }
   footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -142,6 +167,8 @@
         <li><a href="#tentang">Tentang</a></li>
         <li><a href="#skill">Skill</a></li>
         <li><a href="#proyek">Proyek</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#sertifikat">Sertifikat</a></li>
         <li><a href="#kontak">Kontak</a></li>
       </ul>
     </nav>
@@ -242,6 +269,107 @@
         <ul class="tags"><li>Unity 2022</li><li>Game desktop</li><li>C#</li><li>RPG berbasis giliran</li><li>ADDIE</li></ul>
       </article>
       <!-- Proyek lain: salin blok <article class="project"> di atas dan ubah isinya. -->
+    </div>
+  </section>
+
+  <section id="cv">
+    <div class="wrap">
+      <span class="label eyebrow"><i>/</i>CV</span>
+      <h2>Pendidikan dan pengalaman.</h2>
+      <div class="cv">
+        <div>
+          <h3>Pendidikan</h3>
+          <ul class="timeline">
+            <li><span class="when">2022 – 2026</span><strong>Teknik Informatika</strong><p>Universitas Jenderal Achmad Yani. Tugas akhir: game RPG edukasi Perang Diponegoro.</p></li>
+          </ul>
+          <h3>Pengalaman</h3>
+          <ul class="timeline">
+            <!-- Salin blok <li> ini untuk tiap pengalaman. -->
+            <li><span class="when">Juli 2025 – Agustus 2025</span><strong>Pembuat plugin WordPress</strong><p>DISKOMINFO Kota Cimahi, Jawa Barat. Membuat plugin WordPress untuk memudahkan pendataan warga di daerah.</p></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Unduh versi lengkap</h3>
+          <p style="color:var(--muted);max-width:30rem;margin:0 0 1.5rem">Ringkasan lengkap pendidikan, pengalaman, dan skill saya tersedia dalam format PDF.</p>
+          <!-- Taruh file cv.pdf di folder yang sama dengan index.html. -->
+          <a class="btn" href="cv.pdf" download>Unduh CV (PDF)
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 3v11M5 10l5 5 5-5M3 18h14"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sertifikat" class="alt">
+    <div class="wrap">
+      <span class="label eyebrow"><i>/</i>Sertifikat</span>
+      <h2>Pelatihan dan sertifikasi.</h2>
+      <ul class="certs">
+        <li class="cert featured">
+          <a href="sertifikat/bangkit-2024-mobile-development.jpg"><img src="sertifikat/bangkit-2024-mobile-development.jpg" alt="Sertifikat kelulusan Bangkit Academy 2024 jalur Mobile Development" width="1800" height="1273" loading="lazy"></a>
+          <div>
+            <span class="badge">Lulus penuh</span>
+            <h3>Bangkit Academy 2024: Mobile Development</h3>
+            <p class="by">Google, GoTo, dan Traveloka · Program 6 September – 31 Desember 2024</p>
+            <p class="desc">Program akademi yang dipimpin Google lewat Kampus Merdeka (MSIB), dengan jalur Mobile Development. Saya dinyatakan lulus penuh (Full Graduate) dan menyelesaikan capstone project.</p>
+            <div class="links"><a class="more" href="sertifikat/bangkit-2024-mobile-development.jpg">Lihat sertifikat →</a></div>
+          </div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Pengembangan Aplikasi Android Intermediate</h3>
+          <p class="by">Dicoding Indonesia · 28 Desember 2024 · 150 jam</p>
+          <p class="desc">UI lanjutan, animasi, lokalisasi, media, Google Maps, testing, dan Firebase.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/1OP82YYK8PQK">Verifikasi →</a><a class="more" href="sertifikat/dicoding-android-intermediate.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Penerapan Machine Learning untuk Android</h3>
+          <p class="by">Dicoding Indonesia · 9 November 2024 · 60 jam</p>
+          <p class="desc">ML Kit, TensorFlow Lite, MediaPipe, dan Firebase ML di aplikasi Android.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/0LZ04YY8QP65">Verifikasi →</a><a class="more" href="sertifikat/dicoding-machine-learning-android.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Fundamental Aplikasi Android</h3>
+          <p class="by">Dicoding Indonesia · 1 November 2024 · 140 jam</p>
+          <p class="desc">Networking, Room, ViewModel, navigasi, testing, dan WorkManager.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/07Z6436NRPQR">Verifikasi →</a><a class="more" href="sertifikat/dicoding-fundamental-aplikasi-android.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Dasar AI</h3>
+          <p class="by">Dicoding Indonesia · 27 Oktober 2024 · 10 jam</p>
+          <p class="desc">Konsep dasar AI, data, machine learning, dan deep learning.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/QLZ9VVVV7X5D">Verifikasi →</a><a class="more" href="sertifikat/dicoding-dasar-ai.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Membuat Aplikasi Android untuk Pemula</h3>
+          <p class="by">Dicoding Indonesia · 4 Oktober 2024 · 60 jam</p>
+          <p class="desc">Activity, Intent, layout, tema, dan RecyclerView.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/0LZ04G1EQP65">Verifikasi →</a><a class="more" href="sertifikat/dicoding-membuat-aplikasi-android-pemula.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Belajar Dasar Git dengan GitHub</h3>
+          <p class="by">Dicoding Indonesia · 4 Oktober 2024 · 15 jam</p>
+          <p class="desc">Repository, branching, kolaborasi tim, dan pull request.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/6RPNY6YO8Z2M">Verifikasi →</a><a class="more" href="sertifikat/dicoding-git-github.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Memulai Pemrograman dengan Kotlin</h3>
+          <p class="by">Dicoding Indonesia · 22 September 2024 · 50 jam</p>
+          <p class="desc">Dasar Kotlin, OOP, functional programming, generics, dan coroutines.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/1OP84YJ4QZQK">Verifikasi →</a><a class="more" href="sertifikat/dicoding-pemrograman-kotlin.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Pengenalan ke Logika Pemrograman (Programming Logic 101)</h3>
+          <p class="by">Dicoding Indonesia · 12 September 2024 · 6 jam</p>
+          <p class="desc">Gerbang logika, algoritma, dan computational thinking.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/1RXY2O2D1XVM">Verifikasi →</a><a class="more" href="sertifikat/dicoding-logika-pemrograman.pdf">PDF</a></div>
+        </li>
+        <li class="cert">
+          <h3>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h3>
+          <p class="by">Dicoding Indonesia · 11 September 2024 · 9 jam</p>
+          <p class="desc">HTML, CSS, dan JavaScript dasar, serta dokumentasi kode.</p>
+          <div class="links"><a class="more" href="https://www.dicoding.com/certificates/EYX4J9JO5ZDL">Verifikasi →</a><a class="more" href="sertifikat/dicoding-dasar-pemrograman-software.pdf">PDF</a></div>
+        </li>
+      </ul>
     </div>
   </section>
 
