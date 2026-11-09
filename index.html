@@ -154,9 +154,13 @@
   /* Layar pembuka */
   body.locked { overflow: hidden; }
   #intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; text-align: center; padding: 2rem;
-    background: linear-gradient(125deg, #1a1c25 0%, #0b2f73 25%, #3a1c6b 50%, #07485f 75%, #1a1c25 100%);
-    background-size: 400% 400%; animation: gradmove 20s ease-in-out infinite; transition: opacity .7s ease, visibility .7s; }
-  #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
+    background: transparent; transition: visibility 0s .7s; }
+  /* Gradasi memakai body::before yang sama dengan Home, jadi warna dan geraknya identik dan tidak putus saat pindah. */
+  header.top, .hero, main, footer { transition: opacity .7s ease; }
+  body.locked header.top, body.locked .hero, body.locked main, body.locked footer { opacity: 0; }
+  #intro .box { transition: opacity .35s ease, transform .35s ease; }
+  #intro.out { visibility: hidden; pointer-events: none; }
+  #intro.out .box { opacity: 0; transform: translateY(-12px); }
   #intro .box { max-width: 44rem; }
   #intro .mark { font-weight: 700; font-size: 2rem; margin-bottom: 1.5rem; }
   #intro .mark b { color: var(--blue); }
