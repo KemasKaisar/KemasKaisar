@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Kemas Kaisar Saifani Afriansyah – Portofolio</title>
+<meta name="description" content="Portofolio Kemas, lulusan Teknik Informatika UNJANI yang membuat aplikasi mobile dan game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1c25; --bg2: #232935; --ink: #ffffff; --muted: #b9bfcc;
+    --line: #353c4b; --blue: #0a5ff0;
+    --font: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.7 var(--font);
+    padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .label { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .95rem; }
+
+  /* Navigasi */
+  header.top { position: absolute; inset: 0 0 auto 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 6rem; }
+  .logo { font-weight: 700; font-size: 1.7rem; text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+  .logo b { color: var(--blue); font-weight: 700; }
+  nav ul { list-style: none; display: flex; gap: 1.75rem; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-size: 1.05rem; }
+  nav a:hover { color: var(--blue); }
+  .burger { display: none; background: none; border: 0; color: var(--ink); padding: .5rem; cursor: pointer; }
+  @media (max-width: 760px) {
+    .burger { display: block; }
+    nav { position: absolute; top: 5.5rem; left: 1.5rem; right: 1.5rem; background: var(--bg2);
+      border: 1px solid var(--line); padding: 1rem 1.5rem; display: none; }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; gap: .75rem; }
+  }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) 17rem; gap: 1.5rem;
+    min-height: 44rem; align-items: center; padding-top: 6rem; }
+  .intro .bar { width: 8rem; height: .4rem; background: var(--ink); margin-bottom: 2.5rem; }
+  .intro h1 { font-weight: 700; font-size: clamp(2.3rem, 4.2vw, 3.4rem); line-height: 1.12; margin: 0 0 1.5rem; letter-spacing: -.01em; }
+  .intro p { color: var(--muted); max-width: 30rem; margin: 0 0 2.5rem; }
+  .down { width: 6.5rem; height: 6.5rem; border-radius: 50%; background: var(--blue); display: grid; place-items: center; color: #fff; }
+  .down:hover { background: #2b78ff; }
+
+  .side { width: 100%; }
+  .side .block { padding: 1.75rem 0; border-bottom: 1px solid var(--line); }
+  .side .block:first-child { padding-top: 0; }
+  .side .block:last-child { border-bottom: 0; }
+  .side p { color: var(--muted); margin: .75rem 0 1.1rem; font-size: 1rem; }
+  .more { font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .9rem; text-decoration: none;
+    border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+  .more:hover { color: var(--blue); border-color: var(--blue); }
+  .social { display: flex; gap: 1.25rem; margin-top: 1rem; }
+  .social a { display: block; color: var(--ink); }
+  .social a:hover { color: var(--blue); }
+  .social svg { width: 1.7rem; height: 1.7rem; display: block; }
+
+  .portrait { align-self: end; }
+  .portrait img { display: block; width: 100%; height: auto; transform: scale(1.04); transform-origin: bottom right; }
+
+  @media (max-width: 900px) {
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-bottom: 3rem; padding-top: 8rem; }
+    .portrait { max-width: 26rem; margin: 0 auto; }
+    .portrait img { transform: none; }
+    .intro h1 { font-size: clamp(2.3rem, 9vw, 3.4rem); }
+  }
+
+  /* Seksi */
+  section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+  section.alt { background: var(--bg2); }
+  .eyebrow { display: block; margin-bottom: 1.25rem; }
+  .eyebrow i { color: var(--blue); font-style: normal; margin-right: .5rem; }
+  h2 { font-weight: 700; font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.15; margin: 0 0 1.5rem; max-width: 20ch; }
+  .about { display: grid; gap: 3rem; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 860px) { .about { grid-template-columns: 1.3fr 1fr; } }
+  .about p { color: var(--muted); max-width: 36rem; margin: 0 0 1rem; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .stats strong { display: block; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1; font-weight: 700; }
+  .stats span { color: var(--muted); font-size: .95rem; display: block; margin-top: .5rem; }
+  .facts { margin: 2rem 0 0; display: grid; gap: .5rem; }
+  .facts div { display: flex; gap: 1rem; border-top: 1px solid var(--line); padding-top: .6rem; }
+  .facts dt { color: var(--muted); min-width: 8rem; }
+  .facts dd { margin: 0; font-weight: 500; }
+
+  .group { margin-top: 2rem; }
+  .group h3 { margin: 0 0 .9rem; font-size: 1.05rem; color: var(--muted); font-weight: 500; }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; }
+  .tags li { border: 1px solid var(--blue); border-radius: 999px; padding: .25rem 1rem; font-weight: 500; }
+
+  .project { background: var(--bg); border-left: 5px solid var(--blue); padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 52rem; }
+  .project h3 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); line-height: 1.25; margin: 0 0 .4rem; }
+  .project .meta { color: var(--muted); margin: 0 0 1rem; }
+  .project p { color: var(--muted); margin: 0 0 1rem; max-width: 40rem; }
+
+  .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+  .contact li { display: flex; gap: 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: .9rem; }
+  .contact span { min-width: 7rem; color: var(--muted); }
+  .contact a:hover { color: var(--blue); }
+  footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><b>&lt;/&gt;</b> Kemas</a>
+    <button class="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h24M2 20h24"/></svg>
+    </button>
+    <nav id="nav" aria-label="Menu utama">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#skill">Skill</a></li>
+        <li><a href="#proyek">Proyek</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="intro">
+      <div class="bar"></div>
+      <h1>Saya Kemas, pembuat aplikasi mobile dan game.</h1>
+      <p>Lulusan Teknik Informatika Universitas Jenderal Achmad Yani yang suka membangun aplikasi dan game dari nol.</p>
+      <a class="down" href="#tentang" aria-label="Turun ke bagian Tentang">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" stroke="currentColor" stroke-width="3"><path d="M7 15l14 14 14-14"/></svg>
+      </a>
+    </div>
+    <!-- Foto: foto.png (latar transparan) di folder yang sama dengan index.html. -->
+    <div class="portrait"><img src="foto.png" alt="Foto Kemas Kaisar Saifani Afriansyah" width="612" height="800" onerror="this.remove()"></div>
+    <aside class="side">
+      <div class="block">
+        <div class="label">Tentang saya</div>
+        <p>Kemas Kaisar Saifani Afriansyah, lulusan Teknik Informatika angkatan 2022 dari Bandung Barat.</p>
+        <a class="more" href="#tentang">Selengkapnya →</a>
+      </div>
+      <div class="block">
+        <div class="label">Karya saya</div>
+        <p>Proyek aplikasi dan game yang pernah saya kerjakan.</p>
+        <a class="more" href="#proyek">Lihat proyek →</a>
+      </div>
+      <div class="block">
+        <div class="label">Ikuti saya</div>
+        <div class="social">
+          <a href="https://www.linkedin.com/in/kemas-kaisar-saifani-afriansyah-9b4a0824b/" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/kai_ror" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<main>
+  <section id="tentang" class="alt">
+    <div class="wrap about">
+      <div>
+        <span class="label eyebrow"><i>/</i>Tentang saya</span>
+        <h2>Saya suka membuat aplikasi mobile dan game.</h2>
+        <p>Saya Kemas, lulusan Teknik Informatika Universitas Jenderal Achmad Yani angkatan 2022 yang lulus pada 2026. Saya terus belajar dengan membangun aplikasi baru, baik untuk mobile maupun game.</p>
+        <dl class="facts">
+          <div><dt>Kampus</dt><dd>Universitas Jenderal Achmad Yani</dd></div>
+          <div><dt>Program studi</dt><dd>Teknik Informatika</dd></div>
+          <div><dt>Domisili</dt><dd>Cihampelas, Bandung Barat</dd></div>
+        </dl>
+      </div>
+      <div class="stats">
+        <div><strong>8</strong><span>Bahasa pemrograman</span></div>
+        <div><strong>5</strong><span>Tools</span></div>
+        <div><strong>2026</strong><span>Tahun lulus</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skill">
+    <div class="wrap">
+      <span class="label eyebrow"><i>/</i>Skill</span>
+      <h2>Bahasa dan tools yang saya pakai.</h2>
+      <div class="group"><h3>Bahasa pemrograman</h3>
+        <ul class="tags"><li>C</li><li>Java</li><li>Kotlin</li><li>Python</li><li>HTML</li><li>CSS</li><li>PHP</li><li>C#</li></ul></div>
+      <div class="group"><h3>Tools</h3>
+        <ul class="tags"><li>Android Studio</li><li>Visual Studio</li><li>Unity</li><li>Microsoft Office</li><li>Google Workspace</li></ul></div>
+    </div>
+  </section>
+
+  <section id="proyek" class="alt">
+    <div class="wrap">
+      <span class="label eyebrow"><i>/</i>Proyek</span>
+      <h2>Karya yang sudah saya buat.</h2>
+      <article class="project">
+        <h3>Game RPG edukasi Perang Diponegoro</h3>
+        <p class="meta">Tugas akhir</p>
+        <p>Game RPG berbasis giliran yang mengajak siswa menjelajahi peristiwa Perang Diponegoro (1825–1827) lewat cerita, pertempuran, dan pilihan strategi. Sasarannya siswa usia 15–18 tahun, dan pengembangannya mengikuti tahapan ADDIE.</p>
+        <ul class="tags"><li>Unity 2022</li><li>C#</li><li>RPG berbasis giliran</li><li>ADDIE</li></ul>
+      </article>
+      <!-- Proyek lain: salin blok <article class="project"> di atas dan ubah isinya. -->
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="wrap">
+      <span class="label eyebrow"><i>/</i>Kontak</span>
+      <h2>Mari terhubung.</h2>
+      <ul class="contact">
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/kemas-kaisar-saifani-afriansyah-9b4a0824b/">Kemas Kaisar Saifani Afriansyah</a></li>
+        <li><span>Instagram</span><a href="https://www.instagram.com/kai_ror">@kai_ror</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Kemas Kaisar Saifani Afriansyah</div></footer>
+
+<script>
+  var b = document.querySelector('.burger'), n = document.getElementById('nav');
+  b.addEventListener('click', function () {
+    var o = n.classList.toggle('open'); b.setAttribute('aria-expanded', o);
+  });
+  n.addEventListener('click', function (e) { if (e.target.tagName === 'A') { n.classList.remove('open'); b.setAttribute('aria-expanded', false); } });
+</script>
+</body>
+</html>
