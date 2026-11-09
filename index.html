@@ -106,10 +106,9 @@
   .project p { color: var(--muted); margin: 0 0 1rem; max-width: 40rem; }
 
   .slider { position: relative; margin: 0 0 1.75rem; }
-  .shots { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-    border: 1px solid var(--line); background: var(--bg2); scrollbar-width: none; }
-  .shots::-webkit-scrollbar { display: none; }
-  .shots figure { margin: 0; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+  .shots { display: grid; overflow: hidden; touch-action: pan-y; border: 1px solid var(--line); background: var(--bg2); }
+  .shots figure { grid-area: 1 / 1; margin: 0; min-width: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility 0s .9s; }
+  .shots figure.on { opacity: 1; visibility: visible; transition: opacity .9s ease; }
   .shots img { display: block; width: 100%; height: auto; }
   .shots figcaption { color: var(--muted); font-size: .9rem; padding: .6rem .9rem; border-top: 1px solid var(--line); }
   .snav { position: absolute; top: calc(50% - 1.5rem); width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0;
@@ -268,33 +267,38 @@
   n.addEventListener('click', function (e) { if (e.target.tagName === 'A') { n.classList.remove('open'); b.setAttribute('aria-expanded', false); } });
 
   (function () {
-    var t = document.getElementById('shots'), d = document.getElementById('dots'), f = t.children, i;
-    for (i = 0; i < f.length; i++) (function (k) {
-      var x = document.createElement('button'); x.setAttribute('aria-label', 'Gambar ' + (k + 1));
-      x.onclick = function () { t.scrollTo({ left: k * t.clientWidth }); }; d.appendChild(x);
-    })(i);
-    function cur() { return Math.round(t.scrollLeft / t.clientWidth); }
-    function sync() { for (var k = 0; k < d.children.length; k++) d.children[k].setAttribute('aria-current', k === cur()); }
-    t.addEventListener('scroll', sync); sync();
-    document.querySelector('.snav.prev').onclick = function () { t.scrollTo({ left: ((cur() - 1 + f.length) % f.length) * t.clientWidth }); };
-    document.querySelector('.snav.next').onclick = next;
-    var timer, paused = false, off = false, slider = t.parentNode;
-    function next() { t.scrollTo({ left: ((cur() + 1) % f.length) * t.clientWidth }); }
-    function start() { stop(); if (!off && !paused && !document.hidden) timer = setInterval(next, 2000); }
+    var t = document.getElementById('shots'), d = document.getElementById('dots'), f = t.children,
+        pb = document.getElementById('pp'), i = 0, timer, paused = false, off = false, x0 = null, k;
+    for (k = 0; k < f.length; k++) (function (n) {
+      var b = document.createElement('button'); b.setAttribute('aria-label', 'Gambar ' + (n + 1));
+      b.onclick = function () { show(n); start(); }; d.appendChild(b);
+    })(k);
+    function show(n) {
+      i = (n + f.length) % f.length;
+      for (var j = 0; j < f.length; j++) {
+        f[j].classList.toggle('on', j === i);
+        d.children[j].setAttribute('aria-current', j === i);
+      }
+    }
     function stop() { clearInterval(timer); }
+    function start() { stop(); if (!off && !paused && !document.hidden) timer = setInterval(function () { show(i + 1); }, 2000); }
+    var slider = t.parentNode;
     slider.addEventListener('mouseenter', function () { paused = true; stop(); });
     slider.addEventListener('mouseleave', function () { paused = false; start(); });
-    var pb = document.getElementById('pp');
-    pb.onclick = function () { off = !off; pb.textContent = off ? 'Putar' : 'Jeda'; pb.setAttribute('aria-pressed', off); start(); };
-    t.addEventListener('scrollend', start);
-    t.addEventListener('touchstart', stop, { passive: true });
-    t.addEventListener('touchend', start, { passive: true });
     document.addEventListener('visibilitychange', start);
-    start();
+    document.querySelector('.snav.prev').onclick = function () { show(i - 1); start(); };
+    document.querySelector('.snav.next').onclick = function () { show(i + 1); start(); };
+    pb.onclick = function () { off = !off; pb.textContent = off ? 'Putar' : 'Jeda'; pb.setAttribute('aria-pressed', off); start(); };
     t.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') t.scrollTo({ left: (cur() + 1) * t.clientWidth });
-      if (e.key === 'ArrowLeft') t.scrollTo({ left: (cur() - 1) * t.clientWidth });
+      if (e.key === 'ArrowRight') { show(i + 1); start(); }
+      if (e.key === 'ArrowLeft') { show(i - 1); start(); }
     });
+    t.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    t.addEventListener('pointerup', function (e) {
+      if (x0 !== null && Math.abs(e.clientX - x0) > 40) { show(i + (e.clientX < x0 ? 1 : -1)); start(); }
+      x0 = null;
+    });
+    show(0); start();
   })();
 </script>
 </body>
